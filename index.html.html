@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2-Back Verbale - Riabilitazione & Stimolazione Cognitiva</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            },
+            emerald: {
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom animations and clinical focus typography */
+    @keyframes pulseTargetFlash {
+      0% { transform: scale(0.98); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      50% { transform: scale(1.02); box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+      100% { transform: scale(1.0); }
+    }
+    .flash-hit {
+      animation: pulseTargetFlash 0.3s ease-out;
+    }
+    .stimulus-text {
+      text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      letter-spacing: -0.03em;
+    }
+    /* Hide scrollbars during test session */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Top Navigation / Application Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-brand-500/20 font-bold text-white text-lg">
+          2B
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            2-Back Verbale
+            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono font-medium">Clinico v2.4</span>
+          </h1>
+          <p class="text-xs text-slate-400 hidden sm:block">Stimolazione e Riabilitazione Neuropsicologica della Memoria di Lavoro</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <button id="nav-btn-instructions" class="text-xs sm:text-sm px-3 py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 transition flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span class="hidden sm:inline">Guida</span> 2-Back
+        </button>
+        <div id="status-pill" class="text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 font-mono border border-slate-700/60">
+          In Attesa
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-center">
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 1: SETUP SCREEN / PANNELLO CONFIGURAZIONE CLINICA                    -->
+    <!-- ========================================================================= -->
+    <section id="view-setup" class="w-full max-w-4xl mx-auto space-y-6">
+      
+      <!-- Patient / Session Header Info -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7 7z"/></svg>
+              Anagrafica Sessione Clinica
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5">Identificativo del partecipante o sigla del gruppo per il tracciamento dei report</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-brand-500/10 text-brand-400 border border-brand-500/20">
+              Gruppo Avanzato
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+          <div>
+            <label for="cfg-patient-id" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Codice Paziente / Gruppo</label>
+            <input type="text" id="cfg-patient-id" value="GRUPPO-AVANZATO-01" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 font-mono">
+          </div>
+          <div>
+            <label for="cfg-session-date" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Data Somministrazione</label>
+            <input type="date" id="cfg-session-date" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 font-mono">
+          </div>
+          <div>
+            <label for="cfg-clinician-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Operatore / Clinico</label>
+            <input type="text" id="cfg-clinician-name" value="Operatore Neuropsicologia" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500">
+          </div>
+        </div>
+      </div>
+
+      <!-- Test Execution Parameters -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Left: Timing & Quantità Target -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Parametri Temporali & Target
+          </h3>
+
+          <!-- Durata Sessione -->
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1.5">Durata della Prova</label>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" data-duration="120" class="btn-duration py-2 px-3 rounded-xl border border-slate-700 text-xs sm:text-sm font-semibold hover:border-brand-500 focus:outline-none text-slate-300">2 Minuti</button>
+              <button type="button" data-duration="180" class="btn-duration py-2 px-3 rounded-xl border border-brand-500 bg-brand-500/10 text-brand-400 text-xs sm:text-sm font-semibold focus:outline-none">3 Minuti (Std)</button>
+              <button type="button" data-duration="300" class="btn-duration py-2 px-3 rounded-xl border border-slate-700 text-xs sm:text-sm font-semibold hover:border-brand-500 focus:outline-none text-slate-300">5 Minuti</button>
+            </div>
+            <input type="hidden" id="cfg-duration" value="180">
+          </div>
+
+          <!-- Velocità Stimoli (Stimulus Duration + ISI) -->
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div>
+              <label for="cfg-stim-time" class="block text-xs text-slate-400 mb-1">Esposizione Stimolo</label>
+              <select id="cfg-stim-time" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-brand-500">
+                <option value="1500">1.5 s (Rapido)</option>
+                <option value="2000" selected>2.0 s (Standard)</option>
+                <option value="2500">2.5 s (Moderato)</option>
+                <option value="3000">3.0 s (Facilitato)</option>
+              </select>
+            </div>
+            <div>
+              <label for="cfg-isi-time" class="block text-xs text-slate-400 mb-1">Pausa Vuota (ISI)</label>
+              <select id="cfg-isi-time" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-brand-500">
+                <option value="500">0.5 s (Impegnativo)</option>
+                <option value="1000" selected>1.0 s (Standard)</option>
+                <option value="1500">1.5 s (Disteso)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Percentuale / Numero di 2-Back Target -->
+          <div class="pt-1">
+            <div class="flex justify-between items-center mb-1.5">
+              <label for="cfg-target-ratio" class="text-xs text-slate-300 font-medium">Percentuale Stimoli Bersaglio (2-Back)</label>
+              <span id="target-ratio-label" class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">30% (~18 Target)</span>
+            </div>
+            <input type="range" id="cfg-target-ratio" min="20" max="40" step="5" value="30" class="w-full accent-emerald-500 bg-slate-800 rounded-lg cursor-pointer">
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+              <span>20% (Raro)</span>
+              <span>30% (Standard)</span>
+              <span>40% (Frequente)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Dizionari Parole & Canale Risposta -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            Vocabolario & Modalità di Risposta
+          </h3>
+
+          <!-- Selezione Pool Lessicale -->
+          <div>
+            <label for="cfg-word-pool" class="block text-xs font-medium text-slate-300 mb-1.5">Dizionario Lessicale Utilizzato</label>
+            <select id="cfg-word-pool" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-brand-500">
+              <option value="pool-concrete">Pool A: Oggetti Concreti, Natura & Animali (16 Parole)</option>
+              <option value="pool-abstract" selected>Pool B: Concetti Astratti & Complessi (Livello Avanzato)</option>
+              <option value="pool-emotions">Pool C: Emozioni, Relazioni & Professioni</option>
+              <option value="pool-custom">Pool Personalizzato (Inserisci parole manuali)</option>
+            </select>
+          </div>
+
+          <!-- Box Vocabolario Personalizzato (opzionale) -->
+          <div id="custom-words-box" class="hidden">
+            <label for="cfg-custom-words" class="block text-xs text-slate-400 mb-1">Parole separate da virgola (minimo 8 parole):</label>
+            <textarea id="cfg-custom-words" rows="2" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-500 font-mono" placeholder="CASA, SOLE, MARE, PANE, MONTE, VENTO, CUORE, LIBRO, NAVE, NOTTE"></textarea>
+          </div>
+
+          <!-- Modalità di Risposta -->
+          <div class="pt-1">
+            <label class="block text-xs font-medium text-slate-300 mb-1.5">Input di Risposta Abilitato</label>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300">
+              <div class="flex items-center justify-between">
+                <span class="flex items-center gap-2">
+                  <kbd class="px-2 py-0.5 rounded bg-slate-800 text-slate-200 border border-slate-700 font-mono">SPAZIO</kbd>
+                  Barra spaziatrice da tastiera
+                </span>
+                <span class="text-emerald-400 font-medium">Attivo</span>
+              </div>
+              <div class="flex items-center justify-between border-t border-slate-800/80 pt-2">
+                <span class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-brand-500 inline-block"></span>
+                  Pulsante touchscreen/mouse "TARGET!"
+                </span>
+                <span class="text-emerald-400 font-medium">Attivo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feedback Uditivo -->
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-xs text-slate-400">Feedback sonoro discreto sui click</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="cfg-audio-feedback" class="sr-only peer" checked>
+              <div class="w-9 h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action: Launch Test Button -->
+      <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-xs text-slate-400 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          Pronto per la somministrazione al gruppo
+        </div>
+        <button id="btn-start-test" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-500 hover:to-emerald-500 font-bold text-white shadow-lg shadow-brand-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 text-base">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          AVVIA SESSIONE 2-BACK
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 2: TEST EXECUTION SCREEN / SCHERMATA DI ESECUZIONE CLINICA           -->
+    <!-- ========================================================================= -->
+    <section id="view-test" class="hidden w-full max-w-5xl mx-auto flex-1 flex flex-col justify-between py-2 sm:py-4">
+      
+      <!-- Top Test Status Bar -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl px-5 py-3.5 backdrop-blur-md flex items-center justify-between shadow-lg">
+        <div class="flex items-center space-x-4">
+          <div>
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Tempo Residuo</span>
+            <span id="test-timer-display" class="text-lg sm:text-xl font-bold font-mono text-emerald-400">03:00</span>
+          </div>
+          <div class="hidden sm:block h-7 w-px bg-slate-800"></div>
+          <div class="hidden sm:block">
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Progresso Stimoli</span>
+            <span id="test-trial-counter" class="text-sm font-mono text-slate-200">Item 0 / 60</span>
+          </div>
+        </div>
+
+        <!-- Global Live Progress Bar -->
+        <div class="flex-1 max-w-xs mx-4 hidden md:block">
+          <div class="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
+            <div id="test-progress-bar" class="bg-gradient-to-r from-brand-500 to-emerald-400 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Session Controls (Pause, Stop) -->
+        <div class="flex items-center space-x-2">
+          <button id="btn-pause-test" class="p-2 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition" title="Pausa / Riprendi">
+            <svg id="icon-pause" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <svg id="icon-play" class="w-5 h-5 hidden text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </button>
+          <button id="btn-abort-test" class="p-2 rounded-xl border border-rose-900/50 bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 transition" title="Interrompi Sessione">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Central Focus Area: High Legibility Stimulus Card -->
+      <div id="stimulus-card" class="my-6 flex-1 flex flex-col items-center justify-center min-h-[300px] sm:min-h-[380px] bg-slate-900/50 border border-slate-800 rounded-3xl p-6 sm:p-12 relative overflow-hidden transition-all duration-150">
+        
+        <!-- Pause Overlay Message -->
+        <div id="pause-overlay" class="hidden absolute inset-0 bg-slate-950/90 backdrop-blur-md z-30 flex flex-col items-center justify-center p-6 text-center">
+          <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-1">Sessione in Pausa</h3>
+          <p class="text-sm text-slate-400 max-w-sm mb-6">La presentazione degli stimoli è momentaneamente sospesa. Premi riprendi per continuare.</p>
+          <button id="btn-resume-test" class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 font-semibold text-white transition text-sm">
+            Riprendi Sessione
+          </button>
+        </div>
+
+        <!-- Subtle Fixation Cross / State Indicator -->
+        <div id="fixation-cross" class="text-slate-600 text-3xl font-light select-none mb-2 transition opacity-0">
+          +
+        </div>
+
+        <!-- Large Displayed Word -->
+        <div id="stimulus-word" class="stimulus-text text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white select-none transition-all duration-75 uppercase">
+          PRONTO
+        </div>
+
+        <!-- Immediate Response Feedback Pill (Discreet, does not disturb participant) -->
+        <div id="feedback-pill" class="mt-8 text-xs font-mono font-semibold px-4 py-1.5 rounded-full transition-all duration-150 opacity-0 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+          Risposta Registrata
+        </div>
+      </div>
+
+      <!-- Bottom Target Response Button -->
+      <div class="flex flex-col items-center gap-3">
+        <button id="btn-trigger-target" class="w-full max-w-xl py-5 px-8 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-extrabold text-xl sm:text-2xl shadow-xl shadow-emerald-500/20 active:scale-95 transition-all flex items-center justify-center gap-3 border-2 border-emerald-400/30 select-none">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+          <span>TARGET! (È UGUALE A 2 FA)</span>
+        </button>
+        
+        <div class="text-xs text-slate-400 flex items-center gap-2">
+          <span>Premi la <kbd class="px-2 py-0.5 rounded bg-slate-800 text-slate-200 border border-slate-700 font-mono text-[11px]">BARRA SPAZIATRICE</kbd> da tastiera o tocca il pulsante verde</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 3: CLINICAL REPORT SCREEN / SCHERMATA REPORT & ANALISI               -->
+    <!-- ========================================================================= -->
+    <section id="view-report" class="hidden w-full max-w-5xl mx-auto space-y-6 py-2">
+      
+      <!-- Report Header -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">Sessione Conclusa</span>
+            <span id="report-date-badge" class="text-xs text-slate-400 font-mono"></span>
+          </div>
+          <h2 class="text-2xl font-black text-white">Report Neuropsicologico: 2-Back Verbale</h2>
+          <p class="text-xs text-slate-400">Paziente / Gruppo: <span id="report-patient-label" class="text-slate-200 font-semibold font-mono"></span> • Operatore: <span id="report-clinician-label" class="text-slate-200"></span></p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="btn-copy-report" class="px-4 py-2 rounded-xl border border-slate-700 hover:bg-slate-800 text-slate-200 text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+            Copia Appunti
+          </button>
+          <button id="btn-print-report" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm font-semibold transition flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Stampa / PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Metric Cards Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Hits (Target Riconosciuti) -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5">
+          <div class="flex items-center justify-between text-slate-400 mb-1">
+            <span class="text-xs font-semibold uppercase tracking-wider">Hit (Bersagli)</span>
+            <span class="text-emerald-400 text-xs font-bold">✓ Corretto</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="rep-hits" class="text-3xl sm:text-4xl font-black text-white font-mono">0</span>
+            <span id="rep-total-targets" class="text-xs text-slate-400 font-mono">/ 0 Target</span>
+          </div>
+          <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
+            <span>Tasso Hit:</span>
+            <span id="rep-hit-rate" class="font-semibold text-emerald-400 font-mono">0%</span>
+          </div>
+        </div>
+
+        <!-- Omissioni (Miss) -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5">
+          <div class="flex items-center justify-between text-slate-400 mb-1">
+            <span class="text-xs font-semibold uppercase tracking-wider">Omissioni</span>
+            <span class="text-rose-400 text-xs font-bold">✗ Mancati</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="rep-misses" class="text-3xl sm:text-4xl font-black text-white font-mono">0</span>
+          </div>
+          <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
+            <span>Tasso Omissione:</span>
+            <span id="rep-miss-rate" class="font-semibold text-rose-400 font-mono">0%</span>
+          </div>
+        </div>
+
+        <!-- Falsi Allarmi (False Alarms) -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5">
+          <div class="flex items-center justify-between text-slate-400 mb-1">
+            <span class="text-xs font-semibold uppercase tracking-wider">Falsi Allarmi</span>
+            <span class="text-amber-400 text-xs font-bold">! Impulsività</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="rep-false-alarms" class="text-3xl sm:text-4xl font-black text-white font-mono">0</span>
+            <span id="rep-total-nontargets" class="text-xs text-slate-400 font-mono">/ 0 Non-T</span>
+          </div>
+          <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
+            <span>Tasso Falsi All.:</span>
+            <span id="rep-fa-rate" class="font-semibold text-amber-400 font-mono">0%</span>
+          </div>
+        </div>
+
+        <!-- Tempo di Reazione Medio (RT) -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5">
+          <div class="flex items-center justify-between text-slate-400 mb-1">
+            <span class="text-xs font-semibold uppercase tracking-wider">RT Medio (Hit)</span>
+            <span class="text-brand-400 text-xs font-bold">⏱ Latenza</span>
+          </div>
+          <div class="flex items-baseline gap-1">
+            <span id="rep-mean-rt" class="text-3xl sm:text-4xl font-black text-white font-mono">0</span>
+            <span class="text-xs text-slate-400 font-mono">ms</span>
+          </div>
+          <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
+            <span>Dev. Standard:</span>
+            <span id="rep-sd-rt" class="font-semibold text-brand-400 font-mono">± 0 ms</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Neuropsychological Diagnostics Card -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-3 flex items-center gap-2">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Indici di Performance Esecutiva & Sensibilità (Signal Detection)
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+            <span class="text-slate-400 block mb-1">Accuratezza Globale (Hit - FA)</span>
+            <span id="rep-accuracy-score" class="text-xl font-bold font-mono text-emerald-400">0%</span>
+            <p class="text-[10px] text-slate-500 mt-1">Capacità netta di discriminazione tra target e distrattori.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+            <span class="text-slate-400 block mb-1">Indice d-prime (d')</span>
+            <span id="rep-dprime" class="text-xl font-bold font-mono text-brand-400">0.00</span>
+            <p class="text-[10px] text-slate-500 mt-1">Sensibilità percettiva (&gt; 2.0 = discriminazione eccellente).</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+            <span class="text-slate-400 block mb-1">Rifiuti Corretti (Non-Target)</span>
+            <span id="rep-correct-rejections" class="text-xl font-bold font-mono text-slate-200">0</span>
+            <p class="text-[10px] text-slate-500 mt-1">Non-target gestiti con successo senza pressione errata.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chronological Stimulus Log Table -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Cronistoria Completa delle Prove (Trial-by-Trial Audit)</h3>
+            <p class="text-xs text-slate-400">Verifica punto per punto di ogni stimolo mostrato e del comportamento di risposta</p>
+          </div>
+          <span class="text-xs font-mono text-slate-400" id="rep-total-items-badge"></span>
+        </div>
+
+        <div class="overflow-x-auto max-h-72 overflow-y-auto no-scrollbar border border-slate-800 rounded-xl">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-slate-950 text-slate-400 uppercase text-[10px] tracking-wider sticky top-0 border-b border-slate-800">
+              <tr>
+                <th class="py-2.5 px-3">#</th>
+                <th class="py-2.5 px-3">Parola Presentata</th>
+                <th class="py-2.5 px-3">Stimolo 2-Passi Fa (n-2)</th>
+                <th class="py-2.5 px-3">Tipo Item</th>
+                <th class="py-2.5 px-3">Risposta Paziente</th>
+                <th class="py-2.5 px-3">Esito Neuropsicologico</th>
+                <th class="py-2.5 px-3">Tempo Reazione (RT)</th>
+              </tr>
+            </thead>
+            <tbody id="report-trials-tbody" class="divide-y divide-slate-800/60 bg-slate-900/50">
+              <!-- Populated dynamically via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Action Footer: New Session or Return to Setup -->
+      <div class="flex flex-col sm:flex-row items-center justify-end gap-3 pt-2">
+        <button id="btn-new-session" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-500 hover:to-emerald-500 font-bold text-white transition text-sm flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          Nuova Sessione (Rimescola Parole)
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Modal: Instructions & Explanation of 2-Back -->
+  <div id="modal-instructions" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-brand-600/20 text-brand-400 flex items-center justify-center text-sm font-bold">?</span>
+          Come Funziona il Compito 2-Back Verbale
+        </h3>
+        <button id="btn-close-instructions" class="text-slate-400 hover:text-white p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-sm text-slate-300 leading-relaxed">
+        <p>Il compito <strong>N-Back (con N = 2)</strong> richiede di mantenere costantemente aggiornate nella memoria di lavoro le ultime due parole viste.</p>
+        
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 font-mono text-xs space-y-2">
+          <div class="text-slate-400 uppercase text-[10px] font-bold">Esempio Illustrativo di Sequenza:</div>
+          <div class="flex items-center gap-2 text-slate-300">
+            <span>1°:</span> <span class="text-white font-bold">PANE</span> <span class="text-slate-500">(Nessuna azione)</span>
+          </div>
+          <div class="flex items-center gap-2 text-slate-300">
+            <span>2°:</span> <span class="text-white font-bold">CANE</span> <span class="text-slate-500">(Nessuna azione)</span>
+          </div>
+          <div class="flex items-center gap-2 text-emerald-400 font-bold bg-emerald-500/10 p-1.5 rounded border border-emerald-500/20">
+            <span>3°:</span> <span>PANE</span> <span class="text-emerald-300">→ PREMI! (È identica alla 1° parola)</span>
+          </div>
+          <div class="flex items-center gap-2 text-slate-300">
+            <span>4°:</span> <span class="text-white font-bold">SOLE</span> <span class="text-slate-500">(Diversa dalla 2° che era CANE → Non premere)</span>
+          </div>
+          <div class="flex items-center gap-2 text-slate-300">
+            <span>5°:</span> <span class="text-white font-bold">PANE</span> <span class="text-slate-500">(Diversa dalla 3° che era PANE, ma la 3° era 2 posizioni fa? Sì! → TARGET)</span>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-400">
+          <strong>Regola per il partecipante:</strong> Premi appena vedi che la parola a schermo è la stessa identica comparsa <strong>2 posizioni prima</strong>.
+        </p>
+      </div>
+
+      <div class="pt-2">
+        <button id="btn-understood-instructions" class="w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 font-semibold text-white transition text-sm">
+          Ho Capito, Chiudi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Box -->
+  <div id="toast-box" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 text-xs font-medium">
+      <span id="toast-icon">✓</span>
+      <span id="toast-message">Notifica</span>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       LEXICAL DICTIONARIES / POOL DI PAROLE IN ITALIANO
+       ========================================================================= */
+    const WORD_POOLS = {
+      'pool-concrete': [
+        'CANE', 'GATTO', 'TAVOLO', 'ALBERO', 'FIORE', 'CASA', 'LIBRO', 'BARCA',
+        'PANE', 'TRENO', 'SOLE', 'LUNA', 'MARE', 'PORTA', 'SASSO', 'FOGLIA'
+      ],
+      'pool-abstract': [
+        'LIBERTÀ', 'TEMPO', 'DESTINO', 'FUTURO', 'PENSIERO', 'MEMORIA', 'METODO', 'VALORE',
+        'RISCHIO', 'VERITÀ', 'SILENZIO', 'SPAZIO', 'ORIGINE', 'FORMA', 'CONCETTO', 'LOGICA'
+      ],
+      'pool-emotions': [
+        'GIOIA', 'CALMA', 'CORAGGIO', 'SPERANZA', 'MEDICO', 'MAESTRO', 'PITTORE', 'GUIDA',
+        'FIDUCIA', 'PASSIONE', 'STORIA', 'RICORDO', 'ATTESA', 'SORRISO', 'SFIDA', 'VIAGGIO'
+      ]
+    };
+
+    /* =========================================================================
+       AUDIO FEEDBACK (SYNTHESIZED WEB AUDIO API - NO EXTERNAL ASSETS)
+       ========================================================================= */
+    let audioCtx = null;
+    function playBeep(frequency = 600, duration = 0.08, type = 'sine') {
+      const audioToggle = document.getElementById('cfg-audio-feedback');
+      if (!audioToggle || !audioToggle.checked) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // Audio might be constrained by autoplay policies until user clicks
+      }
+    }
+
+    /* =========================================================================
+       CORE STATE & SEQUENCE GENERATOR
+       ========================================================================= */
+    const State = {
+      // Configuration
+      patientId: 'PAZIENTE-01',
+      sessionDate: '',
+      clinician: '',
+      durationSeconds: 180,
+      stimulusDurationMs: 2000,
+      isiDurationMs: 1000,
+      targetRatioPercent: 30,
+      selectedPoolKey: 'pool-abstract',
+      customWords: [],
+
+      // Active Sequence & Trials
+      sequence: [], // Array of { word, is2BackTarget, trialIndex }
+      currentIndex: -1,
+      isRunning: false,
+      isPaused: false,
+
+      // Timing & Timers
+      testTimerId: null,
+      stimulusTimeoutId: null,
+      isiTimeoutId: null,
+      remainingSeconds: 180,
+      stimulusStartTime: 0,
+
+      // Responses Collected
+      // Each trial record: { trialIndex, word, targetWordN2, is2BackTarget, responded, reactionTimeMs, classification }
+      trialRecords: [],
+      currentTrialResponded: false,
+      currentTrialReactionTime: null
+    };
+
+    /**
+     * Algoritmo generatore di sequenze per il compito 2-Back:
+     * Calcola il numero totale di prove $TotalTrials = \lfloor TotalDuration / (StimulusTime + ISI) \rfloor$.
+     * Garantisce l'esatto numero di target $TargetCount = \text{round}(TotalTrials \times Ratio)$.
+     * Evita ripetizioni 1-Back involontarie ($Word_i == Word_{i-1}$) per non generare confusione di inibizione.
+     */
+    function generate2BackSequence() {
+      const trialDurationMs = State.stimulusDurationMs + State.isiDurationMs;
+      const totalTrials = Math.max(15, Math.floor((State.durationSeconds * 1000) / trialDurationMs));
+      
+      // Determine active word vocabulary
+      let vocabulary = [];
+      if (State.selectedPoolKey === 'pool-custom' && State.customWords.length >= 6) {
+        vocabulary = [...State.customWords];
+      } else {
+        vocabulary = [...(WORD_POOLS[State.selectedPoolKey] || WORD_POOLS['pool-abstract'])];
+      }
+
+      // Shuffle vocabulary
+      vocabulary.sort(() => Math.random() - 0.5);
+
+      const numTargets = Math.round((totalTrials - 2) * (State.targetRatioPercent / 100));
+      
+      // Candidate indices for 2-Back targets (indices 2 to totalTrials - 1)
+      const possibleTargetIndices = [];
+      for (let i = 2; i < totalTrials; i++) {
+        possibleTargetIndices.push(i);
+      }
+      possibleTargetIndices.sort(() => Math.random() - 0.5);
+      
+      // Pick target positions ensuring no impossible consecutive deadlocks
+      const targetIndicesSet = new Set(possibleTargetIndices.slice(0, numTargets));
+
+      const sequence = new Array(totalTrials);
+
+      // Build sequence sequentially
+      for (let i = 0; i < totalTrials; i++) {
+        const isTarget = targetIndicesSet.has(i);
+
+        if (isTarget && i >= 2) {
+          // Exactly identical to word at index i - 2
+          sequence[i] = {
+            word: sequence[i - 2].word,
+            is2BackTarget: true,
+            trialIndex: i
+          };
+        } else {
+          // Select a word from vocabulary that is NOT equal to sequence[i - 2]
+          // and preferably not equal to sequence[i - 1] (prevents 1-back collisions)
+          const forbiddenPrev2 = (i >= 2) ? sequence[i - 2].word : null;
+          const forbiddenPrev1 = (i >= 1) ? sequence[i - 1].word : null;
+
+          const candidates = vocabulary.filter(w => w !== forbiddenPrev2 && w !== forbiddenPrev1);
+          const chosen = candidates.length > 0 
+            ? candidates[Math.floor(Math.random() * candidates.length)]
+            : vocabulary[Math.floor(Math.random() * vocabulary.length)];
+
+          sequence[i] = {
+            word: chosen,
+            is2BackTarget: false,
+            trialIndex: i
+          };
+        }
+      }
+
+      return sequence;
+    }
+
+    function startTestSession() {
+      // Gather configs
+      State.patientId = document.getElementById('cfg-patient-id').value.trim() || 'PAZIENTE-ANON';
+      State.sessionDate = document.getElementById('cfg-session-date').value || new Date().toISOString().split('T')[0];
+      State.clinician = document.getElementById('cfg-clinician-name').value.trim() || 'Clinico';
+      State.durationSeconds = parseInt(document.getElementById('cfg-duration').value, 10) || 180;
+      State.stimulusDurationMs = parseInt(document.getElementById('cfg-stim-time').value, 10) || 2000;
+      State.isiDurationMs = parseInt(document.getElementById('cfg-isi-time').value, 10) || 1000;
+      State.targetRatioPercent = parseInt(document.getElementById('cfg-target-ratio').value, 10) || 30;
+      State.selectedPoolKey = document.getElementById('cfg-word-pool').value;
+
+      if (State.selectedPoolKey === 'pool-custom') {
+        const raw = document.getElementById('cfg-custom-words').value;
+        State.customWords = raw.split(/[,;\n]/).map(w => w.trim().toUpperCase()).filter(w => w.length > 1);
+        if (State.customWords.length < 6) {
+          showToast('Inserisci almeno 6 parole valide per il dizionario personalizzato', '!');
+          return;
+        }
+      }
+
+      // Initialize state variables
+      State.remainingSeconds = State.durationSeconds;
+      State.sequence = generate2BackSequence();
+      State.trialRecords = [];
+      State.currentIndex = -1;
+      State.isRunning = true;
+      State.isPaused = false;
+
+      // Switch views
+      document.getElementById('view-setup').classList.add('hidden');
+      document.getElementById('view-report').classList.add('hidden');
+      document.getElementById('view-test').classList.remove('hidden');
+      document.getElementById('status-pill').textContent = 'In Corso';
+      document.getElementById('status-pill').className = 'text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 font-mono border border-emerald-500/20';
+
+      updateTimerDisplay();
+      updateTrialCounterDisplay();
+
+      // Start Countdown Timer
+      clearInterval(State.testTimerId);
+      State.testTimerId = setInterval(() => {
+        if (!State.isPaused && State.isRunning) {
+          State.remainingSeconds--;
+          updateTimerDisplay();
+          updateProgressBar();
+
+          if (State.remainingSeconds <= 0) {
+            finishTestSession();
+          }
+        }
+      }, 1000);
+
+      // Start Trial Sequence loop after a 1.2s countdown preparation
+      showFixation();
+      setTimeout(() => {
+        if (State.isRunning) {
+          nextTrial();
+        }
+      }, 1200);
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(State.remainingSeconds / 60);
+      const seconds = State.remainingSeconds % 60;
+      const str = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      const elem = document.getElementById('test-timer-display');
+      if (elem) elem.textContent = str;
+    }
+
+    function updateTrialCounterDisplay() {
+      const current = Math.max(0, State.currentIndex + 1);
+      const total = State.sequence.length;
+      const elem = document.getElementById('test-trial-counter');
+      if (elem) elem.textContent = `Item ${current} / ${total}`;
+    }
+
+    function updateProgressBar() {
+      const total = State.durationSeconds;
+      const passed = total - State.remainingSeconds;
+      const pct = Math.min(100, Math.max(0, (passed / total) * 100));
+      const bar = document.getElementById('test-progress-bar');
+      if (bar) bar.style.width = `${pct}%`;
+    }
+
+    function showFixation() {
+      const wordElem = document.getElementById('stimulus-word');
+      const crossElem = document.getElementById('fixation-cross');
+      if (wordElem) wordElem.textContent = '';
+      if (crossElem) crossElem.style.opacity = '1';
+    }
+
+    function hideFixation() {
+      const crossElem = document.getElementById('fixation-cross');
+      if (crossElem) crossElem.style.opacity = '0';
+    }
+
+    function nextTrial() {
+      if (!State.isRunning || State.isPaused) return;
+
+      // Conclude previously active trial record if exists
+      finalizeCurrentTrialRecord();
+
+      State.currentIndex++;
+      if (State.currentIndex >= State.sequence.length) {
+        finishTestSession();
+        return;
+      }
+
+      updateTrialCounterDisplay();
+
+      const item = State.sequence[State.currentIndex];
+      State.currentTrialResponded = false;
+      State.currentTrialReactionTime = null;
+
+      // Display word
+      hideFixation();
+      const wordElem = document.getElementById('stimulus-word');
+      wordElem.textContent = item.word;
+      wordElem.className = 'stimulus-text text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white select-none transition-all duration-75 uppercase';
+      State.stimulusStartTime = performance.now();
+
+      // Schedule stimulus removal (Inter-Stimulus Interval / Pause)
+      clearTimeout(State.stimulusTimeoutId);
+      State.stimulusTimeoutId = setTimeout(() => {
+        // Blank screen / ISI
+        wordElem.textContent = '';
+        showFixation();
+
+        // Schedule next stimulus
+        clearTimeout(State.isiTimeoutId);
+        State.isiTimeoutId = setTimeout(() => {
+          nextTrial();
+        }, State.isiDurationMs);
+
+      }, State.stimulusDurationMs);
+    }
+
+    function finalizeCurrentTrialRecord() {
+      if (State.currentIndex < 0 || State.currentIndex >= State.sequence.length) return;
+
+      const item = State.sequence[State.currentIndex];
+      const prev2Item = State.currentIndex >= 2 ? State.sequence[State.currentIndex - 2].word : null;
+      const responded = State.currentTrialResponded;
+      const rt = State.currentTrialReactionTime;
+      const isTarget = item.is2BackTarget;
+
+      let classification = '';
+      if (isTarget && responded) {
+        classification = 'HIT'; // Bersaglio riconosciuto
+      } else if (isTarget && !responded) {
+        classification = 'MISS'; // Omissione
+      } else if (!isTarget && responded) {
+        classification = 'FALSE_ALARM'; // Falso Allarme
+      } else {
+        classification = 'CORRECT_REJECTION'; // Corretto Rifiuto
+      }
+
+      State.trialRecords.push({
+        trialIndex: State.currentIndex + 1,
+        word: item.word,
+        targetWordN2: prev2Item,
+        is2BackTarget: isTarget,
+        responded: responded,
+        reactionTimeMs: rt,
+        classification: classification
+      });
+    }
+
+    function registerTargetResponse() {
+      if (!State.isRunning || State.isPaused || State.currentIndex < 0) return;
+
+      // Allow only one response per trial to avoid double-tapping artifacts
+      if (State.currentTrialResponded) return;
+
+      const now = performance.now();
+      const rt = Math.round(now - State.stimulusStartTime);
+
+      // Verify response is within sensible presentation window
+      const maxWindow = State.stimulusDurationMs + State.isiDurationMs;
+      if (rt <= maxWindow) {
+        State.currentTrialResponded = true;
+        State.currentTrialReactionTime = rt;
+
+        // Visual flash & feedback
+        const btn = document.getElementById('btn-trigger-target');
+        btn.classList.add('ring-4', 'ring-emerald-400');
+        setTimeout(() => btn.classList.remove('ring-4', 'ring-emerald-400'), 150);
+
+        const pill = document.getElementById('feedback-pill');
+        pill.style.opacity = '1';
+        setTimeout(() => pill.style.opacity = '0', 350);
+
+        playBeep(880, 0.05, 'sine');
+      }
+    }
+
+    function togglePauseSession() {
+      if (!State.isRunning) return;
+      State.isPaused = !State.isPaused;
+
+      const overlay = document.getElementById('pause-overlay');
+      const iconPause = document.getElementById('icon-pause');
+      const iconPlay = document.getElementById('icon-play');
+
+      if (State.isPaused) {
+        clearTimeout(State.stimulusTimeoutId);
+        clearTimeout(State.isiTimeoutId);
+        overlay.classList.remove('hidden');
+        iconPause.classList.add('hidden');
+        iconPlay.classList.remove('hidden');
+        document.getElementById('status-pill').textContent = 'In Pausa';
+        document.getElementById('status-pill').className = 'text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 font-mono border border-amber-500/20';
+      } else {
+        overlay.classList.add('hidden');
+        iconPause.classList.remove('hidden');
+        iconPlay.classList.add('hidden');
+        document.getElementById('status-pill').textContent = 'In Corso';
+        document.getElementById('status-pill').className = 'text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 font-mono border border-emerald-500/20';
+        nextTrial();
+      }
+    }
+
+    function finishTestSession() {
+      State.isRunning = false;
+      clearInterval(State.testTimerId);
+      clearTimeout(State.stimulusTimeoutId);
+      clearTimeout(State.isiTimeoutId);
+
+      // Ensure last item is recorded
+      finalizeCurrentTrialRecord();
+
+      // Switch to report view
+      document.getElementById('view-test').classList.add('hidden');
+      document.getElementById('view-report').classList.remove('hidden');
+      document.getElementById('status-pill').textContent = 'Completato';
+      document.getElementById('status-pill').className = 'text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 font-mono border border-slate-700';
+
+      playBeep(523.25, 0.2, 'triangle');
+      renderClinicalReport();
+    }
+
+    function renderClinicalReport() {
+      const records = State.trialRecords;
+      const targets = records.filter(r => r.is2BackTarget);
+      const nonTargets = records.filter(r => !r.is2BackTarget);
+
+      const hits = records.filter(r => r.classification === 'HIT');
+      const misses = records.filter(r => r.classification === 'MISS');
+      const falseAlarms = records.filter(r => r.classification === 'FALSE_ALARM');
+      const correctRejections = records.filter(r => r.classification === 'CORRECT_REJECTION');
+
+      const hitRate = targets.length > 0 ? (hits.length / targets.length) : 0;
+      const missRate = targets.length > 0 ? (misses.length / targets.length) : 0;
+      const faRate = nonTargets.length > 0 ? (falseAlarms.length / nonTargets.length) : 0;
+
+      // Reaction times calculation on Hits
+      const rts = hits.map(h => h.reactionTimeMs).filter(rt => rt != null);
+      let meanRt = 0;
+      let sdRt = 0;
+      if (rts.length > 0) {
+        meanRt = Math.round(rts.reduce((a, b) => a + b, 0) / rts.length);
+        const variance = rts.reduce((sum, val) => sum + Math.pow(val - meanRt, 2), 0) / rts.length;
+        sdRt = Math.round(Math.sqrt(variance));
+      }
+
+      // d-prime approximation (with log-linear correction to avoid infinities)
+      const adjustedHits = (hits.length + 0.5) / (targets.length + 1);
+      const adjustedFAs = (falseAlarms.length + 0.5) / (nonTargets.length + 1);
+      function normInv(p) {
+        // Rational approximation for inverse normal CDF
+        const a1 = -39.6968302866538, a2 = 220.946098424521, a3 = -275.928510446969;
+        const a4 = 138.357751867269, a5 = -30.6647980661472, a6 = 2.50662827745924;
+        const b1 = -54.4760987982241, b2 = 161.585836858041, b3 = -155.698979859887;
+        const b4 = 66.8013118877197, b5 = -13.2806815528857;
+        const q = p - 0.5;
+        if (Math.abs(q) <= 0.42) {
+          const r = q * q;
+          return q * (((((a1 * r + a2) * r + a3) * r + a4) * r + a5) * r + a6) /
+                     (((((b1 * r + b2) * r + b3) * r + b4) * r + b5) * r + 1);
+        }
+        const r = p < 0.5 ? p : 1 - p;
+        const s = Math.sqrt(-Math.log(r));
+        const c1 = -0.00778489400243029, c2 = -0.322396458041136, c3 = -2.40075827716184;
+        const c4 = -2.54973253934373, c5 = 4.37466414146497, c6 = 2.93816398269878;
+        const d1 = 0.00778469570904146, d2 = 0.32246712907004, d3 = 2.445134137143;
+        const d4 = 3.75440866190742;
+        let x = (((((c1 * s + c2) * s + c3) * s + c4) * s + c5) * s + c6) /
+                ((((d1 * s + d2) * s + d3) * s + d4) * s + 1);
+        return p < 0.5 ? -x : x;
+      }
+      const dPrime = Math.max(0, (normInv(adjustedHits) - normInv(adjustedFAs))).toFixed(2);
+      const netAccuracy = Math.round(Math.max(0, (hitRate - faRate) * 100));
+
+      // Fill Header badges
+      document.getElementById('report-patient-label').textContent = State.patientId;
+      document.getElementById('report-clinician-label').textContent = State.clinician;
+      document.getElementById('report-date-badge').textContent = `Data: ${State.sessionDate}`;
+
+      // Fill Cards
+      document.getElementById('rep-hits').textContent = hits.length;
+      document.getElementById('rep-total-targets').textContent = `/ ${targets.length} Target`;
+      document.getElementById('rep-hit-rate').textContent = `${Math.round(hitRate * 100)}%`;
+
+      document.getElementById('rep-misses').textContent = misses.length;
+      document.getElementById('rep-miss-rate').textContent = `${Math.round(missRate * 100)}%`;
+
+      document.getElementById('rep-false-alarms').textContent = falseAlarms.length;
+      document.getElementById('rep-total-nontargets').textContent = `/ ${nonTargets.length} Non-T`;
+      document.getElementById('rep-fa-rate').textContent = `${Math.round(faRate * 100)}%`;
+
+      document.getElementById('rep-mean-rt').textContent = meanRt > 0 ? meanRt : '---';
+      document.getElementById('rep-sd-rt').textContent = sdRt > 0 ? `± ${sdRt} ms` : '± 0 ms';
+
+      document.getElementById('rep-accuracy-score').textContent = `${netAccuracy}%`;
+      document.getElementById('rep-dprime').textContent = dPrime;
+      document.getElementById('rep-correct-rejections').textContent = `${correctRejections.length} / ${nonTargets.length}`;
+      document.getElementById('rep-total-items-badge').textContent = `Totale Item: ${records.length}`;
+
+      // Populate Trial-by-Trial Table
+      const tbody = document.getElementById('report-trials-tbody');
+      tbody.innerHTML = '';
+
+      records.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/40 transition-colors';
+
+        // Styling by classification
+        let badgeClass = '';
+        let badgeText = '';
+        if (r.classification === 'HIT') {
+          badgeClass = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
+          badgeText = 'HIT (Corretto)';
+        } else if (r.classification === 'MISS') {
+          badgeClass = 'bg-rose-500/10 text-rose-400 border-rose-500/20';
+          badgeText = 'OMISSIONE';
+        } else if (r.classification === 'FALSE_ALARM') {
+          badgeClass = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+          badgeText = 'FALSO ALLARME';
+        } else {
+          badgeClass = 'bg-slate-800 text-slate-400 border-slate-700';
+          badgeText = 'Corretto Rifiuto';
+        }
+
+        tr.innerHTML = `
+          <td class="py-2 px-3 text-slate-500">${String(r.trialIndex).padStart(2, '0')}</td>
+          <td class="py-2 px-3 font-bold text-white">${r.word}</td>
+          <td class="py-2 px-3 text-slate-400">${r.targetWordN2 || '<span class="text-slate-600">—</span>'}</td>
+          <td class="py-2 px-3">
+            ${r.is2BackTarget ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-brand-500/20 text-brand-300 border border-brand-500/30">2-BACK TARGET</span>' : '<span class="text-slate-500 text-[11px]">Distrattore</span>'}
+          </td>
+          <td class="py-2 px-3 font-medium">
+            ${r.responded ? '<span class="text-emerald-400">Premuto ✓</span>' : '<span class="text-slate-500">Non Premuto</span>'}
+          </td>
+          <td class="py-2 px-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-medium border ${badgeClass}">
+              ${badgeText}
+            </span>
+          </td>
+          <td class="py-2 px-3 font-mono text-slate-300">
+            ${r.reactionTimeMs ? `${r.reactionTimeMs} ms` : '<span class="text-slate-600">—</span>'}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function copyReportToClipboard() {
+      const records = State.trialRecords;
+      const targets = records.filter(r => r.is2BackTarget);
+      const hits = records.filter(r => r.classification === 'HIT');
+      const misses = records.filter(r => r.classification === 'MISS');
+      const falseAlarms = records.filter(r => r.classification === 'FALSE_ALARM');
+      const meanRtElem = document.getElementById('rep-mean-rt').textContent;
+      const dPrimeElem = document.getElementById('rep-dprime').textContent;
+      const accuracyElem = document.getElementById('rep-accuracy-score').textContent;
+
+      const reportText = `=== REPORT CLINICO 2-BACK VERBALE ===
+Paziente / Codice: ${State.patientId}
+Data Sessione: ${State.sessionDate}
+Operatore: ${State.clinician}
+Durata Prova: ${State.durationSeconds} s (Stimolo: ${State.stimulusDurationMs}ms, ISI: ${State.isiDurationMs}ms)
+Dizionario: ${State.selectedPoolKey}
+
+INDICI DI PERFORMANCE:
+- Totale Prove Somministrate: ${records.length}
+- Target Presentati: ${targets.length}
+- Hit (Bersagli Corretti): ${hits.length} (${Math.round((hits.length/targets.length)*100)}%)
+- Omissioni (Mancati): ${misses.length}
+- Falsi Allarmi (Errori Impulsività): ${falseAlarms.length}
+- Accuratezza Globale: ${accuracyElem}
+- Sensibilità (d-prime): ${dPrimeElem}
+- Tempo Medio di Reazione (RT): ${meanRtElem} ms
+=====================================`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(reportText).then(() => {
+          showToast('Report copiato negli appunti con successo!');
+        }).catch(() => {
+          fallbackCopyText(reportText);
+        });
+      } else {
+        fallbackCopyText(reportText);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Report copiato negli appunti!');
+    }
+
+    function showToast(message, icon = '✓') {
+      const box = document.getElementById('toast-box');
+      document.getElementById('toast-message').textContent = message;
+      document.getElementById('toast-icon').textContent = icon;
+      box.classList.remove('translate-y-20', 'opacity-0');
+      box.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        box.classList.remove('translate-y-0', 'opacity-100');
+        box.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set today's date
+      const dateInput = document.getElementById('cfg-session-date');
+      if (dateInput) {
+        dateInput.value = new Date().toISOString().split('T')[0];
+      }
+
+      // Duration selector buttons
+      const durationButtons = document.querySelectorAll('.btn-duration');
+      durationButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          durationButtons.forEach(b => {
+            b.classList.remove('border-brand-500', 'bg-brand-500/10', 'text-brand-400');
+            b.classList.add('border-slate-700', 'text-slate-300');
+          });
+          btn.classList.add('border-brand-500', 'bg-brand-500/10', 'text-brand-400');
+          btn.classList.remove('border-slate-700', 'text-slate-300');
+          document.getElementById('cfg-duration').value = btn.getAttribute('data-duration');
+          updateTargetRatioLabel();
+        });
+      });
+
+      // Target ratio slider live label
+      const ratioSlider = document.getElementById('cfg-target-ratio');
+      const ratioLabel = document.getElementById('target-ratio-label');
+      function updateTargetRatioLabel() {
+        const val = ratioSlider.value;
+        const dur = parseInt(document.getElementById('cfg-duration').value, 10);
+        const stim = parseInt(document.getElementById('cfg-stim-time').value, 10);
+        const isi = parseInt(document.getElementById('cfg-isi-time').value, 10);
+        const totalTrials = Math.max(15, Math.floor((dur * 1000) / (stim + isi)));
+        const approxTargets = Math.round((totalTrials - 2) * (val / 100));
+        ratioLabel.textContent = `${val}% (~${approxTargets} Target)`;
+      }
+      ratioSlider.addEventListener('input', updateTargetRatioLabel);
+      document.getElementById('cfg-stim-time').addEventListener('change', updateTargetRatioLabel);
+      document.getElementById('cfg-isi-time').addEventListener('change', updateTargetRatioLabel);
+
+      // Custom pool toggle
+      const poolSelect = document.getElementById('cfg-word-pool');
+      poolSelect.addEventListener('change', () => {
+        const customBox = document.getElementById('custom-words-box');
+        if (poolSelect.value === 'pool-custom') {
+          customBox.classList.remove('hidden');
+        } else {
+          customBox.classList.add('hidden');
+        }
+      });
+
+      // Start Button
+      document.getElementById('btn-start-test').addEventListener('click', startTestSession);
+
+      // Response Trigger Button
+      const triggerBtn = document.getElementById('btn-trigger-target');
+      triggerBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        registerTargetResponse();
+      });
+      triggerBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        registerTargetResponse();
+      });
+
+      // Keyboard spacebar listener for target responses
+      window.addEventListener('keydown', (e) => {
+        // Spacebar during active test
+        if (e.code === 'Space' || e.key === ' ') {
+          if (State.isRunning && !State.isPaused) {
+            e.preventDefault();
+            registerTargetResponse();
+          }
+        }
+        // Esc to pause
+        if (e.code === 'Escape' && State.isRunning) {
+          togglePauseSession();
+        }
+      });
+
+      // Pause and Abort controls
+      document.getElementById('btn-pause-test').addEventListener('click', togglePauseSession);
+      document.getElementById('btn-resume-test').addEventListener('click', togglePauseSession);
+      document.getElementById('btn-abort-test').addEventListener('click', () => {
+        if (confirm('Sei sicuro di voler interrompere anticipatamente la sessione di test?')) {
+          finishTestSession();
+        }
+      });
+
+      // Report Buttons
+      document.getElementById('btn-copy-report').addEventListener('click', copyReportToClipboard);
+      document.getElementById('btn-print-report').addEventListener('click', () => {
+        window.print();
+      });
+
+      document.getElementById('btn-new-session').addEventListener('click', () => {
+        document.getElementById('view-report').classList.add('hidden');
+        document.getElementById('view-setup').classList.remove('hidden');
+        document.getElementById('status-pill').textContent = 'In Attesa';
+        document.getElementById('status-pill').className = 'text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 font-mono border border-slate-700/60';
+      });
+
+      // Instructions modal
+      const modal = document.getElementById('modal-instructions');
+      document.getElementById('nav-btn-instructions').addEventListener('click', () => modal.classList.remove('hidden'));
+      document.getElementById('btn-close-instructions').addEventListener('click', () => modal.classList.add('hidden'));
+      document.getElementById('btn-understood-instructions').addEventListener('click', () => modal.classList.add('hidden'));
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.add('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
